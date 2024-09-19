@@ -4,7 +4,8 @@ let contactsWrapper = document.querySelector('#contactsWrapper');
 // Bottoni
 let showContactsBtn = document.querySelector('#showContactsBtn');
 let addContactBtn = document.querySelector('#addContactBtn');
-let removeContactBtn = document.querySelector('#removeContactBtn')
+let removeContactBtn = document.querySelector('#removeContactBtn');
+let editContactBtn = document.querySelectorAll('#editContactBtn');
 
 // Inputs
 let nameInput = document.querySelector('#nameInput');
@@ -33,6 +34,7 @@ let rubrica = {
             div.innerHTML = `
                 <p class="lead">${contatto.contact_name}</p>
                 <p>${contatto.phone_number}</p>
+                <i class="fa-solid fa-wrench editIcon"></i>
                 <i class="fa-solid fa-trash-can icon"></i>
             `;
 
@@ -41,6 +43,8 @@ let rubrica = {
             
         });
         // Icone
+        
+        // CESTINO/CANCELLA
         let icons = document.querySelectorAll('.icon');
 
         icons.forEach( (icona, i)=> {
@@ -49,6 +53,20 @@ let rubrica = {
                 this.showContacts();
             });
         });
+
+
+        // CHIAVE INGLESE/EDIT
+        let editIcon = document.querySelectorAll('.editIcon');
+
+        editIcon.forEach( (icona, i)=> {
+            icona.addEventListener('click', ()=>{
+                let editedName = prompt(`Cambia il nome`);
+                this.contact_list.splice(i, 1, editedName);
+                this.showContacts();
+            });
+        });
+
+
 
     },
 
@@ -76,7 +94,20 @@ let rubrica = {
                 showContactsBtn.innerHTML = 'Nascondi Contatti';
             }
         }
-    }
+    },
+
+    editContacts : function (nameToEdit) {
+
+        alert('Inserisci la modifica');
+        
+        let newName = prompt('Modifica il nome');
+        let newNumber = prompt('Modifica il numero');
+        let index = nameInput.indexOf(nameToEdit);
+        if (index >= 0) {
+            this.contact_list.map(index, 1, [newName.contact_name, newNumber.phone_number]);
+            this.showContacts();
+        } 
+    },
 
 };
 
@@ -101,4 +132,9 @@ addContactBtn.addEventListener('click', ()=>{
 
 removeContactBtn.addEventListener('click', ()=>{
     rubrica.removeContact(nameInput.value);
+});
+
+
+editContactBtn.addEventListener('click', ()=>{
+    rubrica.editContacts();
 });
