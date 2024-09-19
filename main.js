@@ -5,7 +5,7 @@ let contactsWrapper = document.querySelector('#contactsWrapper');
 let showContactsBtn = document.querySelector('#showContactsBtn');
 let addContactBtn = document.querySelector('#addContactBtn');
 let removeContactBtn = document.querySelector('#removeContactBtn');
-let editContactBtn = document.querySelectorAll('#editContactBtn');
+let editContactBtn = document.querySelector('#editContactBtn');
 
 // Inputs
 let nameInput = document.querySelector('#nameInput');
@@ -58,14 +58,19 @@ let rubrica = {
         // CHIAVE INGLESE/EDIT
         let editIcon = document.querySelectorAll('.editIcon');
 
-        editIcon.forEach( (icona, i)=> {
+        editIcon.forEach( (icona, i)=> {            
             icona.addEventListener('click', ()=>{
                 let editedName = prompt(`Cambia il nome`);
-                this.contact_list.splice(i, 1, editedName);
+                let editedNumber = prompt(`Cambia il numero`);
+                console.log(editedName);
+                console.log(i);
+                
+                this.contact_list.splice(i, 1, {contact_name : editedName, phone_number : editedNumber});
                 this.showContacts();
             });
         });
-
+        nameInput.value = '';
+        numberInput.value = '';
 
 
     },
@@ -96,17 +101,24 @@ let rubrica = {
         }
     },
 
-    editContacts : function (nameToEdit) {
-
-        alert('Inserisci la modifica');
+    editContacts : function (nameToEdit, numberToEdit) {
+        // controllo che sia inserito un nome per far partire 
+        if (nameInput.value != '') {
+            alert('Inserisci la modifica');
         
-        let newName = prompt('Modifica il nome');
-        let newNumber = prompt('Modifica il numero');
-        let index = nameInput.indexOf(nameToEdit);
-        if (index >= 0) {
-            this.contact_list.map(index, 1, [newName.contact_name, newNumber.phone_number]);
-            this.showContacts();
-        } 
+            nameToEdit = prompt('Modifica il nome');
+            numberToEdit = prompt('Modifica il numero');
+            let names = this.contact_list.map( (contatto)=> contatto.contact_name );
+            let index = names.indexOf(nameInput.value);
+            
+            if (index >= 0) {
+                this.contact_list[index].contact_name = nameToEdit;
+                this.contact_list[index].phone_number = numberToEdit;
+            } 
+        }
+        console.log(this.contact_list);
+        this.showContacts();
+        
     },
 
 };
@@ -136,5 +148,5 @@ removeContactBtn.addEventListener('click', ()=>{
 
 
 editContactBtn.addEventListener('click', ()=>{
-    rubrica.editContacts();
+    rubrica.editContacts(nameInput.value, numberInput.value);
 });
