@@ -103,6 +103,8 @@ let rubrica = {
 
     editContacts : function (nameToEdit, numberToEdit) {
         // controllo che sia inserito un nome per far partire 
+        if (nameInput.value == '')
+            alert('Campo "Nome" obbligatorio');
         if (nameInput.value != '') {
             this.contact_list.forEach( (contatto)=> {
                 if (contatto.contact_name == nameInput.value) {
