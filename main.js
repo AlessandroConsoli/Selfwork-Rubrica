@@ -104,19 +104,25 @@ let rubrica = {
     editContacts : function (nameToEdit, numberToEdit) {
         // controllo che sia inserito un nome per far partire 
         if (nameInput.value != '') {
-            alert('Inserisci la modifica');
+            this.contact_list.forEach( (contatto)=> {
+                if (contatto.contact_name == nameInput.value) {
+                    alert('Contatto trovato! Inserisci la modifica');
         
-            nameToEdit = prompt('Modifica il nome');
-            numberToEdit = prompt('Modifica il numero');
-            let names = this.contact_list.map( (contatto)=> contatto.contact_name );
-            let index = names.indexOf(nameInput.value);
-            
-            if (index >= 0) {
-                this.contact_list[index].contact_name = nameToEdit;
-                this.contact_list[index].phone_number = numberToEdit;
-            } 
+                    nameToEdit = prompt('Modifica il nome');
+                    numberToEdit = prompt('Modifica il numero');
+        
+                    let names = this.contact_list.map( (contatto)=> contatto.contact_name );
+                    let index = names.indexOf(nameInput.value);
+                    
+                    if (index >= 0) {
+                        this.contact_list[index].contact_name = nameToEdit;
+                        this.contact_list[index].phone_number = numberToEdit;
+                    }
+                }
+            })
+
+ 
         }
-        console.log(this.contact_list);
         this.showContacts();
         
     },
