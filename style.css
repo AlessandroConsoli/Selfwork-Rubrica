@@ -1,6 +1,6 @@
 body{
-    background-color: rgb(13, 2, 8);
-    color: rgb(0, 255, 65);
+    background-color: rgb(22, 14, 111);
+    color: rgb(255, 162, 0);
 
 }
 
@@ -16,22 +16,22 @@ p{
 .btn-custom{
     height: 100px;
     width: 200px;
-    color: rgb(0, 255, 65);
+    color: rgb(255, 162, 0);
     background-color: transparent;
-    border: 2px solid rgb(0, 255, 65);
+    border: 2px solid rgb(255, 162, 0);
     display: block;
     margin: auto;
 }
 
 
 .btn-custom:hover{
-    background-color: rgb(0, 255, 65);
+    background-color: rgb(255, 162, 0);
     color: rgb(13, 2, 8);
 }
 
 
 .card-custom{
-    box-shadow: 4px 4px 15px rgb(0, 143, 17), -3px -3px 5px rgb(0, 255, 65);
+    box-shadow: 4px 4px 15px rgb(255, 183, 0), -3px -3px 5px rgb(255, 162, 0);
     height: 50px;
     border-radius: 20px;
     display: flex;
